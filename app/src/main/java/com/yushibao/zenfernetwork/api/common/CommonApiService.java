@@ -2,7 +2,7 @@ package com.yushibao.zenfernetwork.api.common;
 
 
 import com.yushibao.zenfernetwork.api.HostEnum;
-import com.zenfer.network.bean.NetWordResult;
+import com.yushibao.zenfernetwork.bean.NetWordResult;
 import com.zenfer.network.host.Host;
 
 import java.util.Map;

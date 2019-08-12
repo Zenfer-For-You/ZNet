@@ -5,7 +5,6 @@ import android.text.TextUtils;
 
 import com.yushibao.zenfernetwork.api.common.CommonApiEnum;
 import com.zenfer.network.framwork.Network;
-import com.zenfer.network.upload.NetworkUploadCallBack;
 import com.zenfer.network.upload.UploadFormDataParams;
 import com.zenfer.network.upload.UploadProgressListener;
 import com.zenfer.network.upload.UploadProgressRequestBody;
@@ -66,15 +65,15 @@ public class UploadUtil {
      * @param dataParams file数据
      * @param callBack   回调
      */
-    public static void upload(@CommonApiEnum String tag, @Nullable List<UploadFormDataParams> dataParams, NetworkUploadCallBack callBack) {
+    public static void upload(@CommonApiEnum String tag, @Nullable List<UploadFormDataParams> dataParams, UploadCallBack callBack) {
         if (dataParams == null || dataParams.size() > 0) {
             return;
         }
         switch (tag) {
             case CommonApiEnum.UPLOAD_HEAD_PIC:
                 //上传头像
-                Network.addObservable(Network.getInstance().getApi(UploadService.class).upLoadHeadPic(filesToMultipartBody(dataParams, callBack.getListener())),
-                        callBack.getNetWorkSubscriber());
+                Network.addObservable(Network.getInstance().getApi(UploadService.class)
+                        .upLoadHeadPic(filesToMultipartBody(dataParams, callBack.getListener())), callBack);
                 break;
             default:
         }
@@ -83,7 +82,7 @@ public class UploadUtil {
     /**
      * 上传图片，单张上传
      */
-    public static void uploadPicSingle(String tag, int order, UploadFormDataParams dataParams, NetworkUploadCallBack callBack) {
+    public static void uploadPicSingle(String tag, int order, UploadFormDataParams dataParams, UploadCallBack callBack) {
         if (dataParams == null) {
             return;
         }
@@ -91,13 +90,13 @@ public class UploadUtil {
         switch (tag) {
             case CommonApiEnum.UPLOAD_HEAD_PIC:
                 //上传头像
-                Network.addObservable(Network.getInstance().getApi(UploadService.class).upLoadHeadPic(filesToMultipartBody(order, dataParams, callBack.getListener())),
-                        callBack.getNetWorkSubscriber());
+                Network.addObservable(Network.getInstance().getApi(UploadService.class)
+                        .upLoadHeadPic(filesToMultipartBody(order, dataParams, callBack.getListener())), callBack);
                 break;
             case CommonApiEnum.UPLOAD_PIC:
                 //上传工作环境图片
-                Network.addObservable(Network.getInstance().getApi(UploadService.class).uploadSingle(filesToMultipartBody(order, dataParams, callBack.getListener())),
-                        callBack.getNetWorkSubscriber());
+                Network.addObservable(Network.getInstance().getApi(UploadService.class)
+                        .uploadSingle(filesToMultipartBody(order, dataParams, callBack.getListener())), callBack);
                 break;
             default:
         }

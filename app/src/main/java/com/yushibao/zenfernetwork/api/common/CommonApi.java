@@ -1,6 +1,6 @@
 package com.yushibao.zenfernetwork.api.common;
 
-import com.zenfer.network.bean.NetWordResult;
+import com.yushibao.zenfernetwork.bean.NetWordResult;
 import com.zenfer.network.framwork.Network;
 import com.zenfer.network.framwork.RequestBodyUtil;
 

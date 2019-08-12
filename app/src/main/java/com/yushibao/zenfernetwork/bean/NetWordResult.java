@@ -1,4 +1,4 @@
-package com.zenfer.network.bean;
+package com.yushibao.zenfernetwork.bean;
 
 /**
  * 服务器统一返回数据模型

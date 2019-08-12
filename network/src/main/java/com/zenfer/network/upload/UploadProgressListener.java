@@ -1,7 +1,6 @@
 package com.zenfer.network.upload;
 
 
-import com.zenfer.network.bean.NetWordResult;
 import com.zenfer.network.framwork.NetwordException;
 
 /**
@@ -10,18 +9,20 @@ import com.zenfer.network.framwork.NetwordException;
  * @author Zenfer
  * @date 2019/6/14 9:38
  */
-public interface UploadProgressListener {
+public interface UploadProgressListener<T> {
     /**
      * 上传成功
      *
+     * @param tag    上传接口标签
      * @param result 回调结果
      */
-    void onSuccess(String tag, NetWordResult result);
+    void onSuccess(String tag, T result);
 
     /**
      * 上传失败
      *
-     * @param e 异常
+     * @param tag 上传接口标签
+     * @param e   异常
      */
     void onFail(String tag, NetwordException e);
 

@@ -1,13 +1,13 @@
 package com.yushibao.zenfernetwork;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
+import com.yushibao.zenfernetwork.api.callback.BaseCallBack;
 import com.yushibao.zenfernetwork.api.employer.ApiRequest;
-import com.zenfer.network.bean.NetWordResult;
-import com.zenfer.network.framwork.NetWorkCallBack;
+import com.yushibao.zenfernetwork.bean.NetWordResult;
 import com.zenfer.network.framwork.NetwordException;
 
 public class MainActivity extends AppCompatActivity {
@@ -19,7 +19,8 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.tv_hello_world).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ApiRequest.getCompanyList(new NetWorkCallBack(new NetWorkCallBack.BaseCallBack() {
+
+                ApiRequest.getCompanyList(new BaseCallBack<NetWordResult>() {
                     @Override
                     public void onSuccess(String tag, NetWordResult result) {
                         Toast.makeText(MainActivity.this, result.toString(), Toast.LENGTH_SHORT).show();
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onEnd(String tag) {
 
                     }
-                }));
+                });
             }
         });
 
