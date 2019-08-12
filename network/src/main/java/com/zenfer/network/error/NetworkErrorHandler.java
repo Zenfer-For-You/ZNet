@@ -33,7 +33,7 @@ public class NetworkErrorHandler {
         } else if (!(e instanceof JsonParseException) && !(e instanceof JSONException) && !(e instanceof ParseException)) {
             ex = classException(e);
         } else {
-            ex = new NetwordException(e, 1001);
+            ex = new NetwordException(e, NetworkErrorCode.ERROR_CODE_JSON_PARSE);
             ex.setMessage("解析错误");
         }
         return ex;
@@ -92,34 +92,34 @@ public class NetworkErrorHandler {
     private static NetwordException classException(Throwable e) {
         NetwordException ex;
         if (e instanceof ConnectException) {
-            ex = new NetwordException(e, 1002);
+            ex = new NetwordException(e, NetworkErrorCode.ERROR_CODE_CONNECT_FAIL);
             ex.setMessage("连接失败");
         } else if (e instanceof SSLHandshakeException) {
-            ex = new NetwordException(e, 1005);
+            ex = new NetwordException(e, NetworkErrorCode.ERROR_CODE_SSL_HANDSHAKE);
             ex.setMessage("证书验证失败");
         } else if (e instanceof CertPathValidatorException) {
-            ex = new NetwordException(e, 1007);
+            ex = new NetwordException(e, NetworkErrorCode.ERROR_CODE_CERT_PATH_INVALID);
             ex.setMessage("证书路径没找到");
         } else if (e instanceof SSLPeerUnverifiedException) {
-            ex = new NetwordException(e, 1007);
+            ex = new NetwordException(e, NetworkErrorCode.ERROR_CODE_SSL_PEER_UNVERIFIED);
             ex.setMessage("无有效的SSL证书");
         } else if (e instanceof ConnectTimeoutException) {
-            ex = new NetwordException(e, 1006);
+            ex = new NetwordException(e, NetworkErrorCode.ERROR_CODE_CONNECT_TIMEOUT);
             ex.setMessage("连接超时");
         } else if (e instanceof SocketTimeoutException) {
-            ex = new NetwordException(e, 1006);
+            ex = new NetwordException(e, NetworkErrorCode.ERROR_CODE_CONNECT_TIMEOUT);
             ex.setMessage("连接超时");
         } else if (e instanceof ClassCastException) {
-            ex = new NetwordException(e, 1008);
+            ex = new NetwordException(e, NetworkErrorCode.ERROR_CODE_CLASS_CAST);
             ex.setMessage("类型转换出错");
         } else if (e instanceof NullPointerException) {
-            ex = new NetwordException(e, -100);
+            ex = new NetwordException(e, NetworkErrorCode.ERROR_CODE_NULL);
             ex.setMessage("数据有空");
         } else if (e instanceof UnknownHostException) {
             ex = new NetwordException(e, 404);
             ex.setMessage("服务器地址未找到,请检查网络或Url");
         } else {
-            ex = new NetwordException(e, 1000);
+            ex = new NetwordException(e, NetworkErrorCode.ERROR_CODE_UNKNOWN);
             ex.setMessage(e.getMessage());
         }
         return ex;
