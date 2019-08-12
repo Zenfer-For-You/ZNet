@@ -1,0 +1,49 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 28
+    buildToolsVersion "29.0.1"
+
+
+    defaultConfig {
+        minSdkVersion 22
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    api 'com.android.support:appcompat-v7:28.0.0'
+
+    //网络加载
+    api 'com.squareup.retrofit2:retrofit:2.4.0'
+    api 'com.squareup.retrofit2:converter-gson:2.4.0'
+    api 'com.squareup.retrofit2:adapter-rxjava:2.4.0'
+    api 'com.squareup.okhttp3:okhttp:3.10.0'
+    api 'com.squareup.okhttp3:logging-interceptor:3.10.0'
+    api 'com.squareup.okio:okio:1.14.0'
+    api 'com.google.code.gson:gson:2.8.2'
+    //rxjava
+    api 'io.reactivex.rxjava2:rxjava:2.2.3'
+    api 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    //rxjava内存控制
+    api 'com.trello.rxlifecycle2:rxlifecycle:2.2.2'
+    api 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.2'
+
+//    implementation 'com.google.auto.service:auto-service:1.0-rc4' //自动注册注解处理器
+//    implementation 'com.squareup:javapoet:1.10.0' //javapoet代码生成框架
+}
