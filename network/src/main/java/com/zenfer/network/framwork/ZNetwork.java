@@ -22,7 +22,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.CallAdapter;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
@@ -49,7 +49,7 @@ public class ZNetwork {
     private static final int DEFAULT_TIMEOUT = 10;
 
     private static final Converter.Factory GSON_CONVERTER_FACTORY = GsonConverterFactory.create(new Gson());
-    private static final CallAdapter.Factory RX_JAVA_CALL_ADAPTER_FACTORY = RxJavaCallAdapterFactory.create();
+    private static final CallAdapter.Factory RX_JAVA_CALL_ADAPTER_FACTORY = RxJava2CallAdapterFactory.create();
 
 
     public <T> T getApi(Class<T> clazz) {

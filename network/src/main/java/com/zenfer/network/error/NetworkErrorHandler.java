@@ -16,7 +16,8 @@ import java.security.cert.CertPathValidatorException;
 import javax.net.ssl.SSLHandshakeException;
 import javax.net.ssl.SSLPeerUnverifiedException;
 
-import retrofit2.adapter.rxjava.HttpException;
+import retrofit2.HttpException;
+
 
 /**
  * 网络通用请求异常处理
