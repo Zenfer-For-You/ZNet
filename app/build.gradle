@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     buildToolsVersion "29.0.1"
     defaultConfig {
-        applicationId "com.yushibao.zenfernetwork"
+        applicationId "com.zenfer.znet"
         minSdkVersion 22
         targetSdkVersion 28
         versionCode 1

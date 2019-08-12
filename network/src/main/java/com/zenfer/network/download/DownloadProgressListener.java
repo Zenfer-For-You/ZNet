@@ -1,7 +1,7 @@
 package com.zenfer.network.download;
 
 
-import com.zenfer.network.framwork.NetwordException;
+import com.zenfer.network.error.NetwordException;
 
 import java.io.File;
 

@@ -1,7 +1,7 @@
 package com.zenfer.network.framwork.Intercepter;
 
 
-import com.zenfer.network.common.NetCommonHeaders;
+import com.zenfer.network.ZNet;
 
 import java.io.IOException;
 import java.util.Map;
@@ -28,7 +28,7 @@ public class AppendHeaderParamInterceptorImpl implements Interceptor {
 
         Headers.Builder builder = request.headers().newBuilder();
         //添加公共头部
-        Map<String, String> headers = NetCommonHeaders.commonParam();
+        Map<String, String> headers = ZNet.getInstance().getHeadParam();
         //统一追加Header参数
         for (String key : headers.keySet()) {
             builder.add(key, headers.get(key));

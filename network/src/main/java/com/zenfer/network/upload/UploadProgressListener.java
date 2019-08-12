@@ -1,7 +1,7 @@
 package com.zenfer.network.upload;
 
 
-import com.zenfer.network.framwork.NetwordException;
+import com.zenfer.network.error.NetwordException;
 
 /**
  * 上传监听

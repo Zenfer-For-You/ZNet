@@ -1,10 +1,10 @@
 package com.zenfer.network.download;
 
 
-import com.zenfer.network.common.NetworkErrorCode;
-import com.zenfer.network.framwork.NetwordException;
-import com.zenfer.network.framwork.Network;
-import com.zenfer.network.framwork.RxUtils;
+import com.zenfer.network.error.NetworkErrorCode;
+import com.zenfer.network.error.NetwordException;
+import com.zenfer.network.framwork.ZNetwork;
+import com.zenfer.network.framwork.ZNetRxUtils;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -28,10 +28,10 @@ import okhttp3.ResponseBody;
  */
 public class DownloadUtil {
 
-    public static void download(String url, String path, String filename, final NetworkDownloadCallBack callBack) {
+    public static void download(String url, String path, String filename, final DownloadCallBack callBack) {
 
         final File file = new File(path, filename);
-        Network.getInstance().getApi(callBack.getListener()).download(url)
+        ZNetwork.getInstance().getApi(callBack.getListener()).download(url)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .map(new Function<ResponseBody, File>() {
@@ -42,8 +42,8 @@ public class DownloadUtil {
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(callBack.getNetWorkSubscriber());
-        RxUtils.getInstance().addDisposable(callBack.getNetWorkSubscriber());
+                .subscribe(callBack);
+        ZNetRxUtils.getInstance().addDisposable(callBack);
     }
 
     private static void writeResponseToDisk(File file, ResponseBody body, DownloadProgressListener downloadListener) {
