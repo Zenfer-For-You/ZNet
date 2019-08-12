@@ -3,11 +3,11 @@ package com.zenfer.znet.api.employer;
 
 import android.support.annotation.Nullable;
 
+import com.zenfer.network.framwork.ZNetwork;
 import com.zenfer.znet.api.callback.BaseCallBack;
 import com.zenfer.znet.api.callback.NetworkCallBack;
-import com.zenfer.network.framwork.ZNetwork;
 
-import static com.zenfer.network.common.NetCommonParams.commonObjectParam;
+import static com.zenfer.znet.api.NetCommonParams.commonObjectParam;
 
 /**
  * 网络请求方法

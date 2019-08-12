@@ -3,12 +3,12 @@ package com.zenfer.znet.api.common;
 
 import android.support.annotation.Nullable;
 
-import com.zenfer.znet.api.callback.NetworkCallBack;
 import com.zenfer.network.framwork.ZNetwork;
+import com.zenfer.znet.api.callback.NetworkCallBack;
 
 import java.util.Map;
 
-import static com.zenfer.network.common.NetCommonParams.commonObjectParam;
+import static com.zenfer.znet.api.NetCommonParams.commonObjectParam;
 
 
 /**
