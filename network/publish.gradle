@@ -7,7 +7,7 @@ group 'com.zenfer.network'
 publishing {
     publications {
         Production(MavenPublication) {
-            artifact("$buildDir/outputs/aar/app-release.aar")
+            artifact("$buildDir/outputs/aar/network-release.aar")
             groupId
             artifactId 'ZenferNetwork'
             version this.version
