@@ -41,7 +41,7 @@ public class CommonApiRequest {
     public static void excute(@Nullable Object params, @CommonApiEnum String tag, NetworkCallBack networkCallBack) {
         networkCallBack.setTag(tag);
         try {
-            ZNetwork.addObservable(CommonApi.get(tag, params), networkCallBack);
+            ZNetwork.addObservable(CommonApiSelector.get(tag, params), networkCallBack);
         } catch (Exception e) {
             networkCallBack.onError(e);
         }

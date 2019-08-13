@@ -1,83 +1,188 @@
 package com.zenfer.znet.api.common;
 
+
+import com.zenfer.annotation.ZNetApi;
+import com.zenfer.znet.api.HostEnum;
 import com.zenfer.znet.bean.NetWordResult;
-import com.zenfer.network.framwork.ZNetwork;
-import com.zenfer.network.framwork.RequestBodyUtil;
+import com.zenfer.network.host.Host;
+
+import java.util.Map;
 
 import io.reactivex.Observable;
+import okhttp3.RequestBody;
+import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.POST;
+import retrofit2.http.QueryMap;
+
 
 /**
- * 获取 api 请求的 Observable<NetWordResult> 对象
+ * 公共业务接口
  *
  * @author Zenfer
- * @date 2019/6/11 15:20
+ * @date 2019/6/11 15:17
  */
-public class CommonApi {
+@Host(host =  HostEnum.HOST_COMMON)
+@ZNetApi
+public interface CommonApi {
+    /**
+     * 提现费用获取
+     */
+    @GET("/v1/withdraw/fee")
+    Observable<NetWordResult> getWithdrawInfo(@QueryMap Map<String, Object> map);
 
     /**
-     * 获取对应的 Observable<NetWordResult>
-     *
-     * @param tag    接口标签{@link CommonApiEnum}
-     * @param params 参数
-     * @return 请求接口的Observable
+     * 提现
      */
-    public static Observable<NetWordResult> get(@CommonApiEnum String tag, Object params) throws Exception {
-        switch (tag) {
-            case CommonApiEnum.GET_CODE_LOGIN:
-                return ZNetwork.getInstance().getApi(CommonApiService.class).getLoginCode(RequestBodyUtil.createMapRequestBody(params));
-            case CommonApiEnum.LOGIN:
-                return ZNetwork.getInstance().getApi(CommonApiService.class).login(RequestBodyUtil.createMapRequestBody(params));
-            case CommonApiEnum.REGISTER:
-                return ZNetwork.getInstance().getApi(CommonApiService.class).register(RequestBodyUtil.createMapRequestBody(params));
-            case CommonApiEnum.CONFIG:
-                return ZNetwork.getInstance().getApi(CommonApiService.class).config(RequestBodyUtil.createMapParams(params));
-            case CommonApiEnum.AUTH:
-                return ZNetwork.getInstance().getApi(CommonApiService.class).auth(RequestBodyUtil.createMapRequestBody(params));
-            case CommonApiEnum.BANDCARD_CARD:
-                return ZNetwork.getInstance().getApi(CommonApiService.class).bandCard(RequestBodyUtil.createMapRequestBody(params));
-            case CommonApiEnum.GET_MY_INFO:
-                return ZNetwork.getInstance().getApi(CommonApiService.class).getUserInfo(RequestBodyUtil.createMapParams(params));
-            case CommonApiEnum.GET_BANNER:
-                return ZNetwork.getInstance().getApi(CommonApiService.class).getBannerList(RequestBodyUtil.createMapParams(params));
-            case CommonApiEnum.CHANGE_NICKNAME:
-                return ZNetwork.getInstance().getApi(CommonApiService.class).changeNockname(RequestBodyUtil.createMapRequestBody(params));
-            case CommonApiEnum.CHANGE_PHONE:
-                return ZNetwork.getInstance().getApi(CommonApiService.class).changePhone(RequestBodyUtil.createMapRequestBody(params));
-            case CommonApiEnum.PAY_ORDER:
-                return ZNetwork.getInstance().getApi(CommonApiService.class).payOrder(RequestBodyUtil.createMapRequestBody(params));
-            case CommonApiEnum.COMPANY_AUTHENTICATION:
-                return ZNetwork.getInstance().getApi(CommonApiService.class).companyAuthentication(RequestBodyUtil.createMapRequestBody(params));
-            case CommonApiEnum.GET_COMPANY_INFO:
-                return ZNetwork.getInstance().getApi(CommonApiService.class).getCompanyInfo(RequestBodyUtil.createMapParams(params));
-            case CommonApiEnum.REVENUE_AND_EXPENDITURE:
-                return ZNetwork.getInstance().getApi(CommonApiService.class).getRevenueAndExpenditureList(RequestBodyUtil.createMapParams(params));
-            case CommonApiEnum.WITHDRAW_LIST:
-                return ZNetwork.getInstance().getApi(CommonApiService.class).getWithdrawList(RequestBodyUtil.createMapParams(params));
-            case CommonApiEnum.RECHARGE_LIST:
-                return ZNetwork.getInstance().getApi(CommonApiService.class).getRechargeList(RequestBodyUtil.createMapParams(params));
-            case CommonApiEnum.WITHDRAW_INFO:
-                return ZNetwork.getInstance().getApi(CommonApiService.class).getWithdrawInfo(RequestBodyUtil.createMapParams(params));
-            case CommonApiEnum.WITHDRAW:
-                return ZNetwork.getInstance().getApi(CommonApiService.class).withdraw(RequestBodyUtil.createMapRequestBody(params));
-            case CommonApiEnum.RECHARGE:
-                return ZNetwork.getInstance().getApi(CommonApiService.class).recharge(RequestBodyUtil.createMapRequestBody(params));
-            case CommonApiEnum.SET_PWD:
-                return ZNetwork.getInstance().getApi(CommonApiService.class).setPwd(RequestBodyUtil.createMapRequestBody(params));
-            case CommonApiEnum.CHECK_USER:
-                return ZNetwork.getInstance().getApi(CommonApiService.class).checkUser(RequestBodyUtil.createMapRequestBody(params));
-            case CommonApiEnum.CHECK_VERSION:
-                return ZNetwork.getInstance().getApi(CommonApiService.class).checkUpgrade(RequestBodyUtil.createMapParams(params));
-            case CommonApiEnum.INVITE_LIST:
-                return ZNetwork.getInstance().getApi(CommonApiService.class).getInviteList(RequestBodyUtil.createMapParams(params));
-            case CommonApiEnum.INVITE_DETAIL_LIST:
-                return ZNetwork.getInstance().getApi(CommonApiService.class).getInviteDetailList(RequestBodyUtil.createMapParams(params));
-            case CommonApiEnum.INVITE_SECOND_LIST:
-                return ZNetwork.getInstance().getApi(CommonApiService.class).getInviteSecondList(RequestBodyUtil.createMapParams(params));
-            case CommonApiEnum.INVITE_RQ:
-                return ZNetwork.getInstance().getApi(CommonApiService.class).getInviteRQ(RequestBodyUtil.createMapParams(params));
-            default:
-                throw new Exception("can not match the request tag \"" + tag + "\"");
-        }
-    }
+    @POST("/v1/withdraw/create")
+    Observable<NetWordResult> withdraw(@Body RequestBody body);
 
+    /**
+     * 充值
+     */
+    @POST("/v1/recharge/create")
+    Observable<NetWordResult> recharge(@Body RequestBody body);
+
+    /**
+     * 提现记录
+     */
+    @GET("/v1/withdraw/log")
+    Observable<NetWordResult> getWithdrawList(@QueryMap Map<String, Object> map);
+
+    /**
+     * 充值记录
+     */
+    @GET("/v1/recharge/log")
+    Observable<NetWordResult> getRechargeList(@QueryMap Map<String, Object> map);
+
+    /**
+     * 收支明细
+     */
+    @GET("/v1/user/accountLog")
+    Observable<NetWordResult> getRevenueAndExpenditureList(@QueryMap Map<String, Object> map);
+
+    /**
+     * 获取验证码登录
+     */
+    @POST("/v1/user/code")
+    Observable<NetWordResult> getLoginCode(@Body RequestBody body);
+
+    /**
+     * 去登录
+     */
+    @POST("/v1/user/login")
+    Observable<NetWordResult> login(@Body RequestBody body);
+
+    /**
+     * 注册
+     */
+    @POST("/v1/user/register")
+    Observable<NetWordResult> register(@Body RequestBody body);
+
+    /**
+     * 忘记密码
+     */
+    @GET("/v1/api/forget")
+    Observable<NetWordResult> config(@QueryMap Map<String, Object> map);
+
+    /**
+     * 实名认证
+     */
+    @POST("/v1/cert/person")
+    Observable<NetWordResult> auth(@Body RequestBody body);
+
+    /**
+     * 绑定银行卡
+     */
+    @POST("/v1/user/bind")
+    Observable<NetWordResult> bandCard(@Body RequestBody body);
+
+    /**
+     * 获取个人信息
+     */
+    @GET("/v1/user/info")
+    Observable<NetWordResult> getUserInfo(@QueryMap Map<String, Object> map);
+
+    /**
+     * 获取Banner
+     */
+    @GET("/v1/banner/list")
+    Observable<NetWordResult> getBannerList(@QueryMap Map<String, Object> map);
+
+
+    /**
+     * 修改昵称
+     */
+    @POST("/v1/user/profile")
+    Observable<NetWordResult> changeNockname(@Body RequestBody body);
+
+    /**
+     * 修改手机号
+     */
+    @POST("/v1/user/phone")
+    Observable<NetWordResult> changePhone(@Body RequestBody body);
+
+    /**
+     * 支付订单
+     *
+     * @param body
+     * @return
+     */
+    @POST("/v1/pay/create")
+    Observable<NetWordResult> payOrder(@Body RequestBody body);
+
+    /**
+     * •企业认证
+     *
+     * @param body
+     * @return
+     */
+    @POST("/v1/cert/company")
+    Observable<NetWordResult> companyAuthentication(@Body RequestBody body);
+
+    /**
+     * 获取企业信息
+     */
+    @GET("/v1/cert/companyInfo")
+    Observable<NetWordResult> getCompanyInfo(@QueryMap Map<String, Object> map);
+
+    /**
+     * 设置密码
+     */
+    @POST("/v1/pay/setPwd")
+    Observable<NetWordResult> setPwd(@Body RequestBody body);
+
+    /**
+     * 身份验证
+     */
+    @POST("/v1/cert/personCheck")
+    Observable<NetWordResult> checkUser(@Body RequestBody body);
+
+    /**
+     * 检测更新
+     */
+    @GET("/v1/update")
+    Observable<NetWordResult> checkUpgrade(@QueryMap Map<String, Object> map);
+
+    /**
+     * 已邀好友
+     */
+    @GET("/v1/invite/list")
+    Observable<NetWordResult> getInviteList(@QueryMap Map<String, Object> map);
+    /**
+     * 奖励明细
+     */
+    @GET("/v1/invite/trade-log")
+    Observable<NetWordResult> getInviteDetailList(@QueryMap Map<String, Object> map);
+
+    /**
+     * 邀请有礼 - 查看详情
+     */
+    @GET("/v1/invite/second-invite")
+    Observable<NetWordResult> getInviteSecondList(@QueryMap Map<String, Object> map);
+    /**
+     * 邀请有礼 - 邀请页二维码
+     */
+    @GET("/v1/user/shareRQ")
+    Observable<NetWordResult> getInviteRQ(@QueryMap Map<String, Object> map);
 }

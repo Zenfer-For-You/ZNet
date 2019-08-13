@@ -3,7 +3,6 @@ package com.zenfer.znet.api.upload;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
-import com.zenfer.znet.api.common.CommonApiEnum;
 import com.zenfer.network.framwork.ZNetwork;
 import com.zenfer.network.upload.UploadFormDataParams;
 import com.zenfer.network.upload.UploadProgressListener;
@@ -65,12 +64,12 @@ public class UploadUtil {
      * @param dataParams file数据
      * @param callBack   回调
      */
-    public static void upload(@CommonApiEnum String tag, @Nullable List<UploadFormDataParams> dataParams, UploadCallBack callBack) {
+    public static void upload(@UploadApiEnum String tag, @Nullable List<UploadFormDataParams> dataParams, UploadCallBack callBack) {
         if (dataParams == null || dataParams.size() > 0) {
             return;
         }
         switch (tag) {
-            case CommonApiEnum.UPLOAD_HEAD_PIC:
+            case UploadApiEnum.UPLOAD_HEAD_PIC:
                 //上传头像
                 ZNetwork.addObservable(ZNetwork.getInstance().getApi(UploadService.class)
                         .upLoadHeadPic(filesToMultipartBody(dataParams, callBack.getListener())), callBack);
@@ -88,12 +87,12 @@ public class UploadUtil {
         }
         callBack.setTag(tag);
         switch (tag) {
-            case CommonApiEnum.UPLOAD_HEAD_PIC:
+            case UploadApiEnum.UPLOAD_HEAD_PIC:
                 //上传头像
                 ZNetwork.addObservable(ZNetwork.getInstance().getApi(UploadService.class)
                         .upLoadHeadPic(filesToMultipartBody(order, dataParams, callBack.getListener())), callBack);
                 break;
-            case CommonApiEnum.UPLOAD_PIC:
+            case UploadApiEnum.UPLOAD_PIC:
                 //上传工作环境图片
                 ZNetwork.addObservable(ZNetwork.getInstance().getApi(UploadService.class)
                         .uploadSingle(filesToMultipartBody(order, dataParams, callBack.getListener())), callBack);

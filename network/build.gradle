@@ -44,6 +44,4 @@ dependencies {
     api 'com.trello.rxlifecycle2:rxlifecycle:2.2.2'
     api 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.2'
 
-//    implementation 'com.google.auto.service:auto-service:1.0-rc4' //自动注册注解处理器
-//    implementation 'com.squareup:javapoet:1.10.0' //javapoet代码生成框架
 }

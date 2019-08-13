@@ -15,19 +15,18 @@ import static com.zenfer.znet.api.NetCommonParams.commonObjectParam;
  * @author Zenfer
  * @date 2019/6/11 16:10
  */
-public class ApiRequest {
+public class EmployerApiRequest {
     /**
      * 招工单位列表
      */
     public static void getCompanyList(BaseCallBack callBack) {
-        excute(commonObjectParam(), ApiEnum.COMPANY_LIST, new NetworkCallBack(callBack));
+        excute(commonObjectParam(), EmployerApiEnum.GETCOMPANYLIST, new NetworkCallBack(callBack));
     }
 
-
-    public static void excute(@Nullable Object params, @ApiEnum String tag, NetworkCallBack networkCallBack) {
+    public static void excute(@Nullable Object params, @EmployerApiEnum String tag, NetworkCallBack networkCallBack) {
         networkCallBack.setTag(tag);
         try {
-            ZNetwork.addObservable(Api.get(tag, params), networkCallBack);
+            ZNetwork.addObservable(EmployerApiSelector.get(tag, params), networkCallBack);
         } catch (Exception e) {
             networkCallBack.onError(e);
         }

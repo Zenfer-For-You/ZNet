@@ -1,9 +1,10 @@
 package com.zenfer.znet.api.employer;
 
 
+import com.zenfer.annotation.ZNetApi;
+import com.zenfer.network.host.Host;
 import com.zenfer.znet.api.HostEnum;
 import com.zenfer.znet.bean.NetWordResult;
-import com.zenfer.network.host.Host;
 
 import java.util.Map;
 
@@ -14,7 +15,6 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.QueryMap;
 
-
 /**
  * 雇主业务接口
  *
@@ -22,7 +22,8 @@ import retrofit2.http.QueryMap;
  * @date 2019/6/11 15:17
  */
 @Host(host = HostEnum.HOST_EMPLOYER)
-public interface ApiService {
+@ZNetApi
+public interface EmployerApi {
     /**
      * 补工资申请审核
      */

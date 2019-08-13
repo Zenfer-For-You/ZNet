@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.zenfer.znet.api.callback.BaseCallBack;
-import com.zenfer.znet.api.employer.ApiRequest;
+import com.zenfer.znet.api.employer.EmployerApiRequest;
 import com.zenfer.znet.bean.NetWordResult;
 import com.zenfer.network.error.NetwordException;
 
@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                ApiRequest.getCompanyList(new BaseCallBack<NetWordResult>() {
+                EmployerApiRequest.getCompanyList(new BaseCallBack<NetWordResult>() {
                     @Override
                     public void onSuccess(String tag, NetWordResult result) {
                         Toast.makeText(MainActivity.this, result.toString(), Toast.LENGTH_SHORT).show();
