@@ -9,7 +9,7 @@ publishing {
         Production(MavenPublication) {
             artifact("$buildDir/outputs/aar/network-release.aar")
             groupId
-            artifactId 'ZenferNetwork'
+            artifactId 'ZNet'
             version this.version
 
             pom.withXml {
@@ -37,7 +37,7 @@ bintray {
     configurations = ['archives']
     override = true
     pkg {
-        repo = 'maven'
+        repo = 'ZMaven'
         name = 'zenfer'
         description = "ZNet"
         publish = true

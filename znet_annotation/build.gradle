@@ -3,7 +3,6 @@ apply plugin: 'java-library'
 sourceCompatibility = "1.7"
 targetCompatibility = "1.7"
 
-//中文乱码问题（错误：编码GBK不可映射字符）
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
 }
