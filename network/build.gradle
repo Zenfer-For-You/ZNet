@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-apply from: 'publish.gradle'
+//apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion 28
@@ -19,6 +19,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+
+    lintOptions { // 新增
+        abortOnError false
     }
 }
 
@@ -43,6 +47,13 @@ dependencies {
     api 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.2'
 }
 
-tasks.withType(JavaCompile) {
-    options.encoding = "UTF-8"
-}
+
+//publish {
+////    repoName = 'ZMaven'//不指明，默认是上传到maven,指明的话这里的名字需要和你创建的仓库的名字一样
+//    userOrg = 'zenfer'//bintray.com你的用户名
+//    groupId = 'com.zenfer.network'//jcenter上的路径
+//    artifactId = 'znet'//项目名称
+//    publishVersion = '1.0.0'//版本号
+//    desc = 'my znet'//描述，不重要
+//    website = 'https://github.com/zenfer'//网站，不重要；尽量模拟github上的地址，例如我这样的；当然你有地址最好了
+//}

@@ -2,6 +2,9 @@ package com.zenfer.network.error;
 
 import android.support.annotation.IntDef;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
 /**
  * 网络请求错误码
  *
@@ -20,6 +23,7 @@ import android.support.annotation.IntDef;
         NetworkErrorCode.ERROR_CODE_NULL,
         NetworkErrorCode.ERROR_CODE_DOWNLOAD,
 })
+@Retention(RetentionPolicy.SOURCE)
 public @interface NetworkErrorCode {
 
     /**
