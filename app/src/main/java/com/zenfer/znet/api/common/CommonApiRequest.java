@@ -3,7 +3,7 @@ package com.zenfer.znet.api.common;
 
 import android.support.annotation.Nullable;
 
-import com.zenfer.network.framwork.ZNetwork;
+import com.zenfer.network.framwork.BaseNetWorkDisposable;
 import com.zenfer.znet.api.callback.NetworkCallBack;
 
 import java.util.Map;
@@ -38,10 +38,41 @@ public class CommonApiRequest {
         excute(null, CommonApiEnum.CONFIG, netWorkCallBack);
     }
 
-    public static void excute(@Nullable Object params, @CommonApiEnum String tag, NetworkCallBack networkCallBack) {
+    public static <T> void excute(@Nullable Object params, @CommonApiEnum String tag, BaseNetWorkDisposable<T> networkCallBack) {
         networkCallBack.setTag(tag);
         try {
-            ZNetwork.addObservable(CommonApiSelector.get(tag, params), networkCallBack);
+//            CommonApiSelector.get(tag, params)
+//                    .subscribeOn(Schedulers.io())
+//                    .unsubscribeOn(Schedulers.io())
+//                    .observeOn(AndroidSchedulers.mainThread())
+//                    .flatMap(new Function<NetWordResult, ObservableSource<T>>() {
+//                        @Override
+//                        public ObservableSource<T> apply(NetWordResult result) throws Exception {
+//                            try {
+//                                if (result.getStatus_code() == 200) {
+////                                    GsonUtil.get
+////                                    return Observable.just(result);
+//                                    return Observable.error(new NetwordException(null, 0, ""));
+//                                } else if (result.getStatus_code() == 666) {
+//                                    //请求失败,需要解析data的数据
+//                                    String message = !TextUtils.isEmpty(result.getMessage()) ? result.getMessage() : "未知错误";
+//                                    int errorCode = result.getStatus_code();
+//                                    return Observable.error(new NetwordException(null, errorCode, message));
+//                                } else {
+//                                    //请求失败
+//                                    String message = !TextUtils.isEmpty(result.getMessage()) ? result.getMessage() : "未知错误";
+//                                    int errorCode = result.getStatus_code();
+//                                    return Observable.error(new NetwordException(null, errorCode, message));
+//                                }
+//                            } catch (Exception e) {
+//                                e.printStackTrace();
+//                                return Observable.error(e);
+//                            }
+//                        }
+//                    })
+//                    .subscribe(networkCallBack);
+//            ZNetRxUtils.getInstance().addDisposable(networkCallBack);
+//            ZNetwork.addObservable(CommonApiSelector.get(tag, params), networkCallBack);
         } catch (Exception e) {
             networkCallBack.onError(e);
         }

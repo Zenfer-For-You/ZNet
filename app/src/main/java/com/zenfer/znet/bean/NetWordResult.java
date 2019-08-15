@@ -6,7 +6,7 @@ package com.zenfer.znet.bean;
  * @author Zenfer
  * @date 2019/6/11 10:34
  */
-public class NetWordResult {
+public class NetWordResult<T> {
 
     /**
      * 状态码
@@ -19,7 +19,7 @@ public class NetWordResult {
     /**
      * 数据
      */
-    private Object data;
+    private T data;
 
     public int getStatus_code() {
         return status_code;
@@ -37,11 +37,11 @@ public class NetWordResult {
         this.message = message;
     }
 
-    public Object getData() {
+    public T getData() {
         return data;
     }
 
-    public void setData(Object data) {
+    public void setData(T data) {
         this.data = data;
     }
 

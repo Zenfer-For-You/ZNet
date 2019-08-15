@@ -22,7 +22,8 @@ dependencies {
     api 'com.squareup.retrofit2:retrofit:2.4.0'
     api 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
 
-    implementation 'com.zenfer.network:znet-annotation:1.0.0'
+    implementation project(':znet_annotation')
+//    implementation 'com.zenfer.network:znet-annotation:1.0.0'
 }
 
 //publish {
