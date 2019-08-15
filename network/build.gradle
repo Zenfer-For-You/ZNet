@@ -2,16 +2,15 @@ apply plugin: 'com.android.library'
 //apply plugin: 'com.novoda.bintray-release'
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion "29.0.1"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
 
     defaultConfig {
-        minSdkVersion 22
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0.0"
-
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
     }
 
     buildTypes {
@@ -31,7 +30,6 @@ dependencies {
 
     api 'com.android.support:appcompat-v7:28.0.0'
 
-
     api 'com.squareup.retrofit2:retrofit:2.4.0'
     api 'com.squareup.retrofit2:converter-gson:2.4.0'
     api 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
@@ -46,7 +44,6 @@ dependencies {
     api 'com.trello.rxlifecycle2:rxlifecycle:2.2.2'
     api 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.2'
 }
-
 
 //publish {
 ////    repoName = 'ZMaven'//不指明，默认是上传到maven,指明的话这里的名字需要和你创建的仓库的名字一样

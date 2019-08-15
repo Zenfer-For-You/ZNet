@@ -4,7 +4,6 @@ buildscript {
     repositories {
         google()
         jcenter()
-        
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.1'
@@ -16,7 +15,6 @@ allprojects {
     repositories {
         google()
         jcenter()
-        
     }
 
     tasks.withType(Javadoc) {
@@ -27,4 +25,13 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+ext {
+    compileSdkVersion = 28
+    buildToolsVersion = "29.0.1"
+    minSdkVersion = 16
+    targetSdkVersion = 28
+    versionCode = 1
+    versionName = "1.0.0"
 }

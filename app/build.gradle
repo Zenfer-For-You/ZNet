@@ -1,15 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion "29.0.1"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
     defaultConfig {
         applicationId "com.zenfer.znet"
-        minSdkVersion 22
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
     }
     buildTypes {
         release {
@@ -24,11 +23,11 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 
-    implementation 'com.zenfer.network:znet:1.0.0'
-    implementation 'com.zenfer.network:znet-annotation:1.0.0'
-    annotationProcessor 'com.zenfer.network:znet-compiler:1.0.0'
+//    implementation 'com.zenfer.network:znet:1.0.0'
+//    implementation 'com.zenfer.network:znet-annotation:1.0.0'
+//    annotationProcessor 'com.zenfer.network:znet-compiler:1.0.0'
 
-//    implementation project(':network')
-//    implementation project(':znet_annotation')
-//    annotationProcessor  project(':znet_compiler')
+    implementation project(':network')
+    implementation project(':znet_annotation')
+    annotationProcessor project(':znet_compiler')
 }
