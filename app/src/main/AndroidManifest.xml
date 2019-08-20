@@ -10,10 +10,8 @@
         android:smallScreens="true" />
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- 系统全局弹出框 -->
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
     <!-- 获取设备网络状态，禁用后无法获取网络状态 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!-- 网络权限，当禁用后，无法进行检索等相关业务 -->
