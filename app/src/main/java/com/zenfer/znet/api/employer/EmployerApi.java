@@ -21,7 +21,7 @@ import retrofit2.http.QueryMap;
  * @date 2019/6/11 15:17
  */
 @Host(host = HostEnum.HOST_EMPLOYER)
-@ZNetApi
+@ZNetApi(host = HostEnum.HOST_EMPLOYER)
 public interface EmployerApi {
 
     /**

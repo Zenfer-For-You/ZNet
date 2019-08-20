@@ -1,12 +1,11 @@
 package com.zenfer.znet.api.callback;
 
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 
-import com.zenfer.znet.bean.NetWordResult;
-import com.zenfer.network.framwork.BaseNetWorkDisposable;
-import com.zenfer.network.error.NetwordException;
+import com.zenfer.annotation.ZNetCallBack;
 import com.zenfer.network.error.NetworkErrorHandler;
+import com.zenfer.network.framwork.BaseNetWorkDisposable;
+import com.zenfer.znet.api.HostEnum;
 
 /**
  * 继承 BaseNetWorkDisposable 实现业务的接口回调监听
@@ -14,11 +13,12 @@ import com.zenfer.network.error.NetworkErrorHandler;
  * @author Zenfer
  * @date 2019/8/12 10:51
  */
-public class NetworkCallBack extends BaseNetWorkDisposable<NetWordResult> {
+@ZNetCallBack({HostEnum.HOST_COMMON, HostEnum.HOST_EMPLOYER})
+public class NetworkCallBack<T> extends BaseNetWorkDisposable<T> {
 
-    private BaseCallBack callBack;
+    private BaseCallBack<T> callBack;
 
-    public NetworkCallBack(@Nullable BaseCallBack callBack) {
+    public NetworkCallBack(@Nullable BaseCallBack<T> callBack) {
         this.callBack = callBack;
     }
 
@@ -42,7 +42,6 @@ public class NetworkCallBack extends BaseNetWorkDisposable<NetWordResult> {
         try {
             if (callBack != null) {
                 callBack.onFail(tag, NetworkErrorHandler.getException(e));
-                callBack.onEnd(tag);
             }
         } catch (Throwable t) {
             t.printStackTrace();
@@ -50,34 +49,10 @@ public class NetworkCallBack extends BaseNetWorkDisposable<NetWordResult> {
     }
 
     @Override
-    public void onNext(NetWordResult result) {
+    public void onNext(T result) {
         // 此部分需要根据项目具体需求重新定义
-        try {
-            if (result.getStatus_code() == 200) {
-                if (callBack != null) {
-                    callBack.onSuccess(tag, result);
-                }
-            } else if (result.getStatus_code() == 666) {
-                //请求失败,需要解析data的数据
-                String message = !TextUtils.isEmpty(result.getMessage()) ? result.getMessage() : "未知错误";
-                int errorCode = result.getStatus_code();
-                if (callBack != null) {
-                    callBack.onFail(tag, new NetwordException(null, errorCode, message, result.getData()));
-                }
-            } else {
-                //请求失败
-                String message = !TextUtils.isEmpty(result.getMessage()) ? result.getMessage() : "未知错误";
-                int errorCode = result.getStatus_code();
-                if (callBack != null) {
-                    callBack.onFail(tag, new NetwordException(null, errorCode, message));
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (callBack != null) {
-                callBack.onEnd(tag);
-            }
+        if (callBack != null) {
+            callBack.onSuccess(tag, result);
         }
     }
 }

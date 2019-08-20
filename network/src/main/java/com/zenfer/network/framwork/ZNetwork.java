@@ -2,11 +2,11 @@ package com.zenfer.network.framwork;
 
 
 import com.google.gson.Gson;
+import com.zenfer.annotation.ZNetApi;
 import com.zenfer.network.download.DownloadProgressListener;
 import com.zenfer.network.download.DownloadService;
 import com.zenfer.network.framwork.Intercepter.AppendHeaderParamInterceptorImpl;
 import com.zenfer.network.framwork.Intercepter.LogInterceptorImpl;
-import com.zenfer.network.host.Host;
 import com.zenfer.network.host.HostManager;
 
 import java.util.Map;
@@ -55,8 +55,8 @@ public class ZNetwork {
     public <T> T getApi(Class<T> clazz) {
         T service = (T) servicesMap.get(clazz.getCanonicalName());
         if (service == null) {
-            if (clazz.isAnnotationPresent(Host.class)) {
-                Host host = clazz.getAnnotation(Host.class);
+            if (clazz.isAnnotationPresent(ZNetApi.class)) {
+                ZNetApi host = clazz.getAnnotation(ZNetApi.class);
                 if (host != null) {
                     service = getRetrofit(HostManager.getInstance().getHost(host.host())).create(clazz);
                     servicesMap.put(clazz.getCanonicalName(), service);
@@ -109,6 +109,16 @@ public class ZNetwork {
                 .addInterceptor(new AppendHeaderParamInterceptorImpl())
                 .addNetworkInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                 .build();
+    }
+
+    /**
+     * 生成Rxjava链式调度
+     */
+    public static <T> Observable<T> addObservable(Observable<T> observable) {
+        return observable
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
     }
 
     /**
