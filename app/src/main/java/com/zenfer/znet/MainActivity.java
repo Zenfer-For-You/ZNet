@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.zenfer.network.error.NetwordException;
+import com.zenfer.network.util.GsonUtil;
 import com.zenfer.znet.api.callback.BaseCallBack;
 import com.zenfer.znet.api.callback.NetworkCallBack;
 import com.zenfer.znet.api.common.CommonApiRequest;
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
                 CommonApiRequest.getRechargeList(map, new NetworkCallBack<>(new BaseCallBack<Pages<RevenueAndExpenditureBean>>() {
                     @Override
                     public void onSuccess(String tag, Pages<RevenueAndExpenditureBean> result) {
-                        Toast.makeText(MainActivity.this, result.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, GsonUtil.toJsonString(result), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
